@@ -1,0 +1,102 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Chat</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">chat</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="cards">
+    <div style="display: flex; gap: 8px;">
+      <div style="flex: 1;">
+        <ion-item lines="none">
+          <ion-select label="Origen" [(ngModel)]="sourceLang" interface="action-sheet">
+            @for (lang of languages; track lang.code) {
+              <ion-select-option [value]="lang.code">{{ lang.name }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      </div>
+
+      <ion-button shape="round" fill="clear" (click)="swapLanguages()">
+        <ion-icon name="swap-horizontal-outline" style="font-size: 21px;"></ion-icon>
+      </ion-button>
+
+      <div style="flex: 1;">
+        <ion-item lines="none">
+          <ion-select label="Destino" [(ngModel)]="targetLang " interface="action-sheet">
+            @for (lang of languages; track lang.code) {
+              <ion-select-option [value]="lang.code">{{ lang.name }}</ion-select-option>
+            }
+          </ion-select>
+        </ion-item>
+      </div>
+    </div>
+  </ion-card>
+  @if (messages$ | async; as messages) {
+    @if (messages.length > 0) {
+      <ion-card class="cards" style="max-height: 333px; overflow-y: auto;">
+        <ion-card-header>
+          <ion-item lines="none">
+            <ion-icon name="mail-outline" slot="start"></ion-icon>
+            <ion-input type="email" placeholder="Correo electrónico" [(ngModel)]="receiverUser"></ion-input>
+          </ion-item>
+        </ion-card-header>
+  
+        @for (msg of messages; track msg.timestamp) {
+          <ion-card-content>
+            <ion-item >
+              <div class="message-content">
+                <div class="header-row">
+                  <span class="user-text">{{ msg.from }}</span>
+                  <small class="date-text">{{ msg.timestamp?.toDate?.() | date: 'short' }}</small>
+                </div>
+                <div class="text-row ion-margin-bottom">
+                  <div><strong>{{ msg.sourceLang }}:</strong> {{ msg.originalText }}</div>
+                  <div><strong>{{ msg.targetLang }}:</strong> {{ msg.translatedText }}</div>
+                </div>
+              </div>
+            </ion-item>
+            <!-- <ion-button color="danger" fill="clear" shape="round" class="ion-margin-top" (click)="deleteMessage(msg.id)">
+              <ion-icon name="trash-outline" slot="start"></ion-icon>
+              Eliminar
+            </ion-button> -->
+          </ion-card-content>
+        }
+      </ion-card>
+    } @else {
+      <div class="ion-padding no-messages">
+        <ion-icon name="chatbubble-ellipses-outline" style="font-size: 48px;"></ion-icon>
+        <p>No hay mensajes aún.<br></p>
+      </div>
+    }
+  } @else {
+    <div class="ion-padding" style="display: flex; justify-content: center;">
+      <ion-spinner name="crescent" color="primary"></ion-spinner>
+    </div>
+  }
+  
+  
+
+
+  <ion-footer class="footer-chat">
+    <ion-toolbar>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="newMessage" placeholder="Mensaje..."></ion-input>
+        <ion-button fill="clear" slot="end" (click)="sendMessage()">
+          <ion-icon name="send"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-toolbar>
+    <ion-progress-bar 
+    *ngIf="isLoading" 
+    type="indeterminate" 
+    color="primary">
+  </ion-progress-bar>
+  </ion-footer>
+</ion-content>

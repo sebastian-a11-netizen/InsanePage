@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Historial</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">history</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-searchbar [(ngModel)]="searchQuery" class="searchbar-redondeado" placeholder="Buscar traducción"></ion-searchbar>
+
+  <ion-card class="cards">
+    <ion-card-header>
+      <ion-card-title>Traducciones</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-list>
+        @if (filteredHistory().length > 0) {
+          @for (entry of filteredHistory(); track entry.timestamp) {
+            <ion-item>
+              <ion-label class="history-label">
+                <div class="original-text">{{ entry.original }}</div>
+                <div class="translated-text">{{ entry.translated }}</div>
+                <p class="history-meta">{{ entry.from }} → {{ entry.to }} | {{ entry.timestamp | date:'short' }}</p>
+              </ion-label>
+            </ion-item>
+          }
+        } @else {
+          <ion-text color="medium" class="ion-padding">No hay traducciones aún.</ion-text>
+        }
+      </ion-list>
+      
+    </ion-card-content>
+    <ion-button expand="block" shape="round" color="danger" fill="clear" class="ion-margin-horizontal ion-margin-bottom" (click)="deleteHistory()">
+      <ion-icon name="trash-outline" slot="start"></ion-icon>
+      Eliminar Historial
+    </ion-button>
+  </ion-card>
+  
+</ion-content>

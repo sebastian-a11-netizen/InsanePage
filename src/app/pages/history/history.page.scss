@@ -1,0 +1,34 @@
+.searchbar-redondeado {
+    --background: #222222;
+    --placeholder-color: #ffffff;
+    --border-radius: 17px;
+    margin: 20px auto;
+    width: 97%;
+    height: 42px;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  
+  .history-label {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  
+  .original-text {
+    color: var(--ion-color-medium);
+    font-size: 1rem;
+  }
+  
+  .translated-text {
+    color: var(--ion-color-primary);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+  
+  .history-meta {
+    font-size: 0.8rem;
+    color: gray;
+    margin-top: 2px;
+  }
+  

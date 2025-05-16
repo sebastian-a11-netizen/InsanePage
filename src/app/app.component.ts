@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -6,14 +8,25 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
+
+  isLogged = false;
+  userEmail: string = '';
+
   public appPages = [
-    { title: 'Inbox', url: '/folder/inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/spam', icon: 'warning' },
+    { title: 'Traducción', url: 'translation', icon: 'globe'},
+    { title: 'Chat', url: 'chat', icon: 'chatbubble-ellipses' },
+    { title: 'Historial', url: 'history', icon: 'reader' },
+    { title: 'Cuenta', url: 'login', icon: 'person' },
+    { title: 'Acerca de', url: '/folder/archived', icon: 'alert-circle' }
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
-  constructor() {}
+  public labels = ['Family', 'Friends'];
+  constructor(private authService: AuthService) {}
+
+  ngOnInit() {
+    this.authService.getCurrentUser().subscribe((user) => {
+      this.isLogged = !!user;
+      this.userEmail = user?.email || '';
+    });
+  }
+  
 }

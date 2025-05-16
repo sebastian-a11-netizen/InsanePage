@@ -35,3 +35,26 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+.cards {
+    margin: 20px;
+    border-radius: 20px;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+
+.toast-base {
+    --border-radius: 15px;
+    max-width: 250px;
+    max-width: 250px;
+    text-align: center;
+    margin: 0 auto !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    text-align: center;
+  }
+
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }

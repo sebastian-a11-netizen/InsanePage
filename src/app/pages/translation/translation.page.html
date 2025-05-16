@@ -1,0 +1,87 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Traducción</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense" >
+    <ion-toolbar>
+      <ion-title size="large">Traducción</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="cards">
+    <ion-card-header>
+      <ion-card-title>Entrada</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-select label="Idioma" [(ngModel)]="sourceLang" interface="action-sheet">
+          @for (lang of languages; track lang.code) {
+            <ion-select-option [value]="lang.code">{{lang.name}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-input [(ngModel)]="originalText" label="Texto original" [clearInput]="true" placeholder="Ingresa el texto para traducir">
+    </ion-input>
+      </ion-item>
+    </ion-card-content>
+    <ion-button shape="round" fill="clear" class="ion-margin-start ion-margin-bottom" (click)="translateText()">
+      <ion-icon name="language-outline" slot="start"></ion-icon>
+      Traducir
+    </ion-button>
+    
+    <ion-button id="open-toast-input" shape="round" fill="default" class="ion-margin-bottom" (click)="copyOriginalText()">
+      <ion-icon name="copy-outline" slot="start"></ion-icon>
+      Copiar
+    </ion-button>
+    <ion-toast trigger="open-toast-input" message="Copiado" [duration]="2000" cssClass="toast-base" ></ion-toast>
+    <ion-progress-bar 
+  *ngIf="isLoading" 
+  type="indeterminate" 
+  color="primary" 
+  class="ion-margin-top">
+</ion-progress-bar>
+
+  </ion-card>
+
+  <ion-card class="cards">
+    <ion-card-header>
+      <ion-card-title>Salida</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <ion-item>
+        <ion-select label="Idioma" [(ngModel)]="targetLang" interface="action-sheet">
+          @for (lang of languages; track lang.code) {
+            <ion-select-option [value]="lang.code">{{lang.name}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-text [color]="translatedText.trim() ? 'primary' : 'medium'">
+          {{ translatedText.trim() || 'Traducción' }}
+        </ion-text>
+      </ion-item>
+      
+    </ion-card-content>
+    <ion-button shape="round" fill="default" class="ion-margin-start ion-margin-bottom" (click)="readTextAloud()">
+      @if (speaking) {
+        <ion-spinner name="lines-sharp-small" slot="start" style="margin-right: 8px;"></ion-spinner>
+        Detener
+      } @else {
+        <ion-icon name="volume-medium-outline" slot="start" style="font-size: 24px;"></ion-icon>
+        Escuchar
+      }
+    </ion-button>    
+    <ion-button id="open-toast-output" shape="round" fill="default" class="ion-margin-bottom" (click)="copyTranslatedText()">
+      <ion-icon name="copy-outline" slot="start"></ion-icon>
+      Copiar
+    </ion-button>
+    <ion-toast trigger="open-toast-output" message="Copiado" [duration]="2000" cssClass="toast-base" ></ion-toast>
+  </ion-card>
+
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">login</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+    <ion-card class="cards">
+      <ion-card-header>
+        <ion-card-title>Sesión Actual</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content>
+        <ion-item lines="none">
+          <ion-icon name="mail-outline" slot="start"></ion-icon>
+          <ion-input [(ngModel)]="email" type="email" placeholder="Correo"></ion-input>
+        </ion-item>
+
+        <ion-item lines="none">
+          <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+          <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
+        </ion-item>
+
+      </ion-card-content>
+      <ion-button  shape="round" fill="clear" class="ion-margin-start ion-margin-bottom" (click)="login()" [disabled]="isLogged">
+        <ion-icon name="log-in-outline" slot="start" style="font-size: 24px;"></ion-icon>
+        Ingresar
+      </ion-button>
+
+      <ion-button  shape="round" id="present-alert" fill="clear" class="ion-margin-bottom" color="danger" [disabled]="!isLogged">
+        <ion-icon name="log-out-outline" slot="start" style="font-size: 24px;"></ion-icon>
+        Cerrar
+      </ion-button>
+      <ion-alert
+      trigger="present-alert"
+      header="Confirmar"
+      message="¿Cerrar sesión?"
+      [buttons]="alertButtons"
+    ></ion-alert>
+    </ion-card>
+
+    <ion-card class="cards" style="display: flex; justify-content: center;">
+      <ion-card-content>
+        <ion-label >No tienes una cuenta? </ion-label>
+        <ion-router-link routerLink="/regis" color="primary">Registrar</ion-router-link>
+      </ion-card-content>
+    </ion-card>
+
+</ion-content>

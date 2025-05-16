@@ -1,0 +1,44 @@
+.footer-chat {
+  border-radius: 25px;
+  overflow: hidden;
+  margin: 20px;
+  width: 96%;
+  position: fixed;
+  bottom: 0;
+}
+
+.message-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 6px;
+}
+
+.header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.user-text {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--ion-color-primary);
+}
+
+.date-text {
+  font-size: 12px;
+  color: gray;
+}
+
+.text-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  font-size: 15px;
+}
+
+

@@ -1,0 +1,64 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cuenta</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">regis</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="cards">
+    <ion-card-header>
+      <ion-card-title>Registrarse</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+
+      <ion-item lines="none">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="name" placeholder="Nombre"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="language-outline" slot="start"></ion-icon>
+        <ion-select label="Idioma" [(ngModel)]="language" interface="action-sheet">
+          @for (lang of languages; track lang.code) {
+            <ion-select-option [value]="lang.code">{{lang.name}}</ion-select-option>
+          }
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="email" type="email" placeholder="email@domain.com"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="password" type="password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+
+      <ion-item lines="none">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input [(ngModel)]="confirmPassword" type="password" placeholder="Confirmar contraseña"></ion-input>
+      </ion-item>
+
+    </ion-card-content>
+    <ion-button shape="round" fill="clear" class="ion-margin-start ion-margin-bottom" (click)="register()">
+      <ion-icon name="cloud-upload-outline" slot="start" style="font-size: 24px;"></ion-icon>
+      Iniciar
+    </ion-button>
+  </ion-card>
+
+  <ion-card class="cards" style="display: flex; justify-content: center;">
+    <ion-card-content>
+      <ion-label>Ya tienes una cuenta? </ion-label>
+  <ion-router-link routerLink="/login" color="primary">Iniciar sesión
+  </ion-router-link>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>
